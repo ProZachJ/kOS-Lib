@@ -45,5 +45,7 @@ function point_to_node {
 function burn {
   parameter burn_cb.
   
-  burn_cb().	
+  burn_cb().
+  wait until ship:apoapsis = ship:periapsis.
+  lock throttle to 0.	
 }.
