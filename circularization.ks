@@ -1,3 +1,6 @@
+//circularize method takes a function delegate as a parameter
+//allows custom logic for burn initiation
+
 function circularize {
   parameter burn_cb.
   
