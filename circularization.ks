@@ -3,7 +3,6 @@
 
 function circularize {
   parameter burn_cb.
-  
   set circ_node to plot_circularization_node().
   set burn_duration to calculate_burn_duration(circ_node).
   wait until circ_node:eta <= (burn_duration/2 + 60).
@@ -31,17 +30,17 @@ function calculate_burn_duration {
   parameter mynode.
   list engines in probe.
   set engine to probe[0].
+  lock throttle to 0.
+  engine:activate().
   set max_acc to engine:maxthrust/ship:mass.
-  print max_acc.
-  print mynode:deltav:mag.
+  engine:shutdown().
   set burn_duration to round(mynode:deltav:mag)/round(max_acc).
   print "crude burn duration: " + round(burn_duration) + "s".
-  return burn_duration.	
+  return burn_duration.
 }.
 
 function point_to_node {
   parameter mynode.
-  
   set burn_vector to mynode:burnvector.
   lock steering to burn_vector.
   rcs on.
@@ -52,7 +51,6 @@ function point_to_node {
 
 function burn {
   parameter burn_cb.
-  
   burn_cb().
   round(ship:orbit:eccentricity, 2) <= 0.01
   wait until ship:apoapsis = ship:periapsis.
