@@ -54,6 +54,7 @@ function burn {
   parameter burn_cb.
   
   burn_cb().
+  round(ship:orbit:eccentricity, 2) <= 0.01
   wait until ship:apoapsis = ship:periapsis.
   lock throttle to 0.	
 }.
