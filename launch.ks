@@ -1,25 +1,8 @@
-CLEARSCREEN.
-
+clearscreen.
+//load libs
 run circularization.ks.
 
-LOCK THROTTLE TO 1.0. 
-
-PRINT "Counting down:".
-
-FROM {local countdown is 3.} UNTIL countdown = 0 STEP {SET countdown to countdown - 1.} DO {
-    PRINT "..." + countdown.
-    WAIT 1. // pauses the script here for 1 second.
-}
-
-LOCK STEERING TO UP.
-
-WAIT 0.5.
-PRINT "Activating Main Engine.".
-STAGE.
-
-WAIT 1.
-PRINT "CLAMPS RELEASED".
-STAGE.
+run countdown_to_launch.ks.
 
 when maxthrust <= 0 then {
     stage.
