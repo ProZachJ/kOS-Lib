@@ -1,12 +1,15 @@
 //Assumes 2 stages to reach target apoapsis
 //circulatization burn details defined by a delegate
 clearscreen.
+
 //load libs
 run ascent.ks.
 run circularization.ks.
+
 //launch
 run countdown_to_launch.ks.
 when maxthrust <= 0 then { stage. }.
+
 ascend_to_velocity(100).
 turn_to_heading(90,85).
 gravity_turn().
