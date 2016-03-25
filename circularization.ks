@@ -46,13 +46,12 @@ function point_to_node {
   rcs on.
   wait until abs(burn_vector:pitch - facing:pitch) < 0.15 and abs(burn_vector:yaw - facing:yaw) < 0.15.
   rcs off.
-  print "facing node".	
+  print "facing node".
 }.
 
 function burn {
   parameter burn_cb.
   burn_cb().
-  round(ship:orbit:eccentricity, 2) <= 0.01
-  wait until ship:apoapsis = ship:periapsis.
-  lock throttle to 0.	
+  wait until round(ship:orbit:eccentricity, 2) <= 0.01.
+  lock throttle to 0.
 }.
