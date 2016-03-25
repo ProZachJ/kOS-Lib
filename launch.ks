@@ -1,6 +1,6 @@
 CLEARSCREEN.
 
-run circularize.ks.
+run circularization.ks.
 
 LOCK THROTTLE TO 1.0. 
 
@@ -45,7 +45,7 @@ until ship:altitude >= 30000  {
 
 clearscreen.
 print "Executing gravity turn" at(0,1).
-lock steeing to ship:prograde.
+lock steering to ship:prograde.
 
 
 until ship:altitude >= 65000 {
@@ -66,6 +66,7 @@ until ship:apoapsis >= 2863000 {
 }
 
 lock throttle to 0.
+wait 1.
 stage.
 clearscreen.
 
@@ -77,7 +78,7 @@ function doBurn {
   RCS ON.
   wait 1.
   lock throttle to 1.
-  STAGE.
+  stage.
   RCS OFF.
 
 }

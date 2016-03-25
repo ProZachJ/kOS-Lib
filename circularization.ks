@@ -4,20 +4,22 @@
 function circularize {
   parameter burn_cb.
   
-  set local circ_node to plot_circularization_node().
-  set local burn_duration to calculate_burn_duration(circ_node).
+  set circ_node to plot_circularization_node().
+  set burn_duration to calculate_burn_duration(circ_node).
   wait until circ_node:eta <= (burn_duration/2 + 60).
+  print "Point".
   point_to_node(circ_node).
   wait until circ_node:eta <= (burn_duration/2).
   burn(burn_cb).
 }.
 
-function plot_circulatization_node {
-  set local apo_time to time:seconds + eta:apoapsis.
-  set local circ_node to node(apo_time, 0, 0, 100).
+function plot_circularization_node {
+  set apo_time to time:seconds + eta:apoapsis.
+  set circ_node to node(apo_time, 0, 0, 100).
   add circ_node.
-  until circ_node:orbit:periapsis = ship:apoapsis {
-      set circ_node:prograde to circ_node:prograde + 5.
+  until round(circ_node:orbit:eccentricity, 2) <= 0.01 {
+      print  round(circ_node:orbit:periapsis) + "   " +  round(ship:apoapsis) + " " + circ_node:orbit:eccentricity at(0,1).
+      set circ_node:prograde to circ_node:prograde + 0.1.
   }
   print "Node Apoapsis: " + circ_node:orbit:apoapsis.
   print "Node Periapsis: " + circ_node:orbit:periapsis.
@@ -27,9 +29,12 @@ function plot_circulatization_node {
 
 function calculate_burn_duration {
   parameter mynode.
-  
-  set local max_acc to ship:maxthrust / ship:mass.
-  set local burn_duration to mynode:deltav:mag / max_acc.
+  list engines in probe.
+  set engine to probe[0].
+  set max_acc to engine:maxthrust/ship:mass.
+  print max_acc.
+  print mynode:deltav:mag.
+  set burn_duration to round(mynode:deltav:mag)/round(max_acc).
   print "crude burn duration: " + round(burn_duration) + "s".
   return burn_duration.	
 }.
@@ -37,7 +42,7 @@ function calculate_burn_duration {
 function point_to_node {
   parameter mynode.
   
-  set local burn_vector to mynode:burnvector.
+  set burn_vector to mynode:burnvector.
   lock steering to burn_vector.
   rcs on.
   wait until abs(burn_vector:pitch - facing:pitch) < 0.15 and abs(burn_vector:yaw - facing:yaw) < 0.15.
