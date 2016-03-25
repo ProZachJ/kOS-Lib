@@ -1,5 +1,7 @@
 CLEARSCREEN.
 
+run circularize.ks.
+
 LOCK THROTTLE TO 1.0. 
 
 PRINT "Counting down:".
@@ -64,24 +66,22 @@ until ship:apoapsis >= 2863000 {
 }
 
 lock throttle to 0.
+stage.
 clearscreen.
 
-until ship:altitude >= round(ship:apoapsis,0) {
-    print "coasting to apoapsis" at(0,1).
-    wait 0.01.
+print "coasting to apoapsis" at(0,1).
+
+function doBurn {
+  clearscreen.
+  PRINT "BURN" AT(0,1).
+  RCS ON.
+  wait 1.
+  lock throttle to 1.
+  STAGE.
+  RCS OFF.
+
 }
 
-clearscreen.
-PRINT "BURN" AT(0,1).
-lock steering to ship:prograde.
-RCS ON.
-wait 1.
-lock throttle to 1.
-STAGE.
-RCS OFF.
-
-until round(ship:periapsis,0) >= 2863000 {
-    wait 0.01.
-}
-lock throttle to 0.
+set burncb to doBurn@.
+circularize(burncb).
 wait 1.
