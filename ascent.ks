@@ -18,7 +18,7 @@ function turn_to_heading {
  }.
 
 function gravity_turn {
-  parameter turn_alt
+  parameter turn_alt.
   until ship:altitude >= turn_alt  {
     print "Altitude: " + round(ship:altitude,0) + "m" at(0,11).
     print "Apoapsis: " + round(ship:apoapsis,0) + "m" at(0,12).
