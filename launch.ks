@@ -12,8 +12,8 @@ when maxthrust <= 0 then { stage. }.
 
 ascend_to_velocity(100).
 turn_to_heading(90,85).
-gravity_turn().
-seperate_fairings().
+gravity_turn(30000).
+seperate_fairings(65000).
 burn_to_target_apoapsis(2863000).
 
 //eject spent stage
