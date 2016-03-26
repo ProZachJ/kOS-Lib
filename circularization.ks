@@ -14,9 +14,9 @@ function circularize {
 
 function plot_circularization_node {
   set apo_time to time:seconds + eta:apoapsis.
-  set circ_node to node(apo_time, 0, 0, 100).
+  set circ_node to node(apo_time, 0, 0, 400).
   add circ_node.
-  until round(circ_node:orbit:eccentricity, 2) <= 0.01 {
+  until round(circ_node:orbit:eccentricity, 2) <= 0.05 {
       print  round(circ_node:orbit:periapsis) + "   " +  round(ship:apoapsis) + " " + circ_node:orbit:eccentricity at(0,1).
       set circ_node:prograde to circ_node:prograde + 0.1.
   }
@@ -44,7 +44,7 @@ function point_to_node {
   set burn_vector to mynode:burnvector.
   lock steering to burn_vector.
   rcs on.
-  wait until abs(burn_vector:pitch - facing:pitch) < 0.15 and abs(burn_vector:yaw - facing:yaw) < 0.15.
+  wait until abs(burn_vector:direction:pitch - facing:pitch) < 0.15 and abs(burn_vector::direction:yaw - facing:yaw) < 0.15.
   rcs off.
   print "facing node".
 }.
