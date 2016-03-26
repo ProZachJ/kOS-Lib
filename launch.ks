@@ -7,7 +7,7 @@ run ascent.ks.
 run circularization.ks.
 
 //launch
-run countdown_to_launch.ks.
+run countdown.ks.
 when maxthrust <= 0 then { stage. }.
 
 ascend_to_velocity(100).
