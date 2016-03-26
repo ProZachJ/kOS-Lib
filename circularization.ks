@@ -51,7 +51,9 @@ function point_to_node {
 
 function burn {
   parameter burn_cb.
+  set mynode to nextnode().
   burn_cb().
   wait until round(ship:orbit:eccentricity, 2) <= 0.05.
   lock throttle to 0.
+  remove mynode.
 }.
