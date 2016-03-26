@@ -44,7 +44,7 @@ function point_to_node {
   set burn_vector to mynode:burnvector.
   lock steering to burn_vector.
   rcs on.
-  wait until abs(burn_vector:direction:pitch - facing:pitch) < 0.15 and abs(burn_vector::direction:yaw - facing:yaw) < 0.15.
+  wait until abs(burn_vector:direction:pitch - facing:pitch) < 0.15 and abs(burn_vector:direction:yaw - facing:yaw) < 0.15.
   rcs off.
   print "facing node".
 }.
@@ -52,6 +52,6 @@ function point_to_node {
 function burn {
   parameter burn_cb.
   burn_cb().
-  wait until round(ship:orbit:eccentricity, 2) <= 0.01.
+  wait until round(ship:orbit:eccentricity, 2) <= 0.05.
   lock throttle to 0.
 }.

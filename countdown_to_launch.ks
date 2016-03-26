@@ -7,6 +7,6 @@ FROM {local countdown is 3.} UNTIL countdown = 0 STEP {SET countdown to countdow
 }.
 PRINT "Activating Main Engine.".
 STAGE.
-WAIT 2.
+WAIT 3.0.
 PRINT "CLAMPS RELEASED".
 STAGE.
