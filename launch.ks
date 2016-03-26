@@ -11,8 +11,8 @@ run countdown.ks.
 when maxthrust <= 0 then { stage. }.
 
 ascend_to_velocity(100).
-turn_to_heading(90,85).
-gravity_turn(20000).
+turn_to_heading(90,80).
+gravity_turn(15000).
 seperate_fairings(65000).
 burn_to_target_apoapsis(2863000).
 
