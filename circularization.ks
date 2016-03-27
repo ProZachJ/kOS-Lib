@@ -16,7 +16,7 @@ function circularize {
 function warp {
   parameter circ_node.
   parameter burn_duration.
-  warp to (circ_node:eta - (burn_duration/2 + 70)).
+  warpto(circ_node:eta - (burn_duration/2 + 70)).
 }.
 
 function plot_circularization_node {
