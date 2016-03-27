@@ -5,11 +5,18 @@ function circularize {
   parameter burn_cb.
   set circ_node to plot_circularization_node().
   set burn_duration to calculate_burn_duration(circ_node).
+  warp(circ_node, burn_duration).
   wait until circ_node:eta <= (burn_duration/2 + 60).
   print "Point".
   point_to_node(circ_node).
   wait until circ_node:eta <= (burn_duration/2).
   burn(burn_cb).
+}.
+
+function warp {
+  parameter circ_node.
+  parameter burn_duration.
+  warp to (circ_node:eta - (burn_duration/2 + 70)).
 }.
 
 function plot_circularization_node {
