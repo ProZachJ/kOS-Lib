@@ -25,12 +25,16 @@ function timewarp {
 function plot_circularization_node {
   parameter target_ecc.
   set apo_time to time:seconds + eta:apoapsis.
-  set circ_node to node(apo_time, 0, 0, 400).
+  set circ_node to node(apo_time, 0, 0, 1).
   add circ_node.
-  until round(circ_node:orbit:eccentricity, 2) <= target_ecc {
-      print  round(circ_node:orbit:periapsis) + "   " +  round(ship:apoapsis) + " " + circ_node:orbit:eccentricity at(0,1).
-      set circ_node:prograde to circ_node:prograde + 0.1.
-  }
+  until round(circ_node:orbit:eccentricity, 2) = target_ecc {
+    print  round(circ_node:orbit:periapsis) + "   " +  round(ship:apoapsis) + " " + circ_node:orbit:eccentricity at(0,1).
+    if round(circ_node:orbit:eccentricity,2) > target_ecc {
+      set circ_node:prograde to circ_node:prograde / 2.
+    }else if round(circ_node:orbit:eccentricity,2) < target_ecc {
+      set circ_node:prograde to circ_node:prograde * 2.
+    }.
+}
   print "Node Apoapsis: " + circ_node:orbit:apoapsis.
   print "Node Periapsis: " + circ_node:orbit:periapsis.
   print "Node DeltaV: " + circ_node:deltav:mag.
