@@ -3,13 +3,14 @@
 
 function circularize {
   parameter burn_cb.
-  set circ_node to plot_circularization_node().
+  parameter target_ecc.
+  set circ_node to plot_circularization_node(target_ecc).
   set burn_duration to calculate_burn_duration(circ_node).
   timewarp(circ_node, burn_duration).
   print "Point".
   point_to_node(circ_node).
   wait until circ_node:eta <= (burn_duration/2).
-  burn(burn_cb).
+  burn(burn_cb, target_ecc).
 }.
 
 function timewarp {
@@ -25,7 +26,7 @@ function plot_circularization_node {
   set apo_time to time:seconds + eta:apoapsis.
   set circ_node to node(apo_time, 0, 0, 400).
   add circ_node.
-  until round(circ_node:orbit:eccentricity, 2) <= 0.05 {
+  until round(circ_node:orbit:eccentricity, 2) <= target_ecc {
       print  round(circ_node:orbit:periapsis) + "   " +  round(ship:apoapsis) + " " + circ_node:orbit:eccentricity at(0,1).
       set circ_node:prograde to circ_node:prograde + 0.1.
   }
@@ -60,9 +61,10 @@ function point_to_node {
 
 function burn {
   parameter burn_cb.
+  parameter target_ecc.
   set mynode to nextnode.
   burn_cb().
-  wait until round(ship:orbit:eccentricity, 2) <= 0.05.
+  wait until round(ship:orbit:eccentricity, 2) <= target_ecc.
   lock throttle to 0.
   remove mynode.
 }.

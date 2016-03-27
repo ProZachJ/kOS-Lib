@@ -19,8 +19,8 @@ burn_to_target_apoapsis(2863000).
 //eject spent stage
 stage.
 
-//pass burn routine to circularizer
-circularize(doBurn@).
+//pass burn routine and target eccentricity to circularizer
+circularize(doBurn@, 0.025).
 wait 1.
 
 function doBurn {
