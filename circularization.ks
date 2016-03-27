@@ -17,7 +17,7 @@ function timewarp {
   parameter burn_duration.
   print "warping" at(0,2).
   set warp to 4.
-  wait until circ_node:eta <= (burn_duration/2 + 60).i
+  wait until circ_node:eta <= (burn_duration/2 + 60).
   set warp to 0.
 }.
 
