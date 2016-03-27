@@ -20,8 +20,7 @@ burn_to_target_apoapsis(2863000).
 stage.
 
 //pass burn routine to circularizer
-set burncb to doBurn@.
-circularize(burncb).
+circularize(doBurn@).
 wait 1.
 
 function doBurn {
