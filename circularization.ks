@@ -23,6 +23,7 @@ function timewarp {
 }.
 
 function plot_circularization_node {
+  parameter target_ecc.
   set apo_time to time:seconds + eta:apoapsis.
   set circ_node to node(apo_time, 0, 0, 400).
   add circ_node.
