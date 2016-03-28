@@ -16,7 +16,7 @@ function circularize {
 function timewarp {
   parameter circ_node.
   parameter burn_duration.
-  print "warping" at(0,2).
+  print "warping" at(0,12).
   set warp to 4.
   wait until circ_node:eta <= (burn_duration/2 + 120).
   set warp to 0.
@@ -25,20 +25,20 @@ function timewarp {
 function plot_circularization_node {
   parameter target_ecc.
   set apo_time to time:seconds + eta:apoapsis.
-  set burn_velocity to 3431 - ship:velocity.
-  set circ_node to node(apo_time, 0, 0, burn_velocity).
+  //TODO detect body and calculate escape velocity.
+  set initial_burn_velocity to 3431 - velocity:orbit:mag.
+  set circ_node to node(apo_time, 0, 0, initial_burn_velocity).
   add circ_node.
   until round(circ_node:orbit:eccentricity, 2) = target_ecc {
     print  round(circ_node:orbit:periapsis) + "   " +  round(ship:apoapsis) + " " + circ_node:orbit:eccentricity at(0,1).
     if round(circ_node:orbit:eccentricity,2) > target_ecc {
-      print "High Eccentricity " + circ_node:orbit:eccentricity at(0,10).    
+      print "High Eccentricity " + circ_node:orbit:eccentricity at(0,10).
       set circ_node:prograde to circ_node:prograde * 0.5.
     }else if round(circ_node:orbit:eccentricity,2) < target_ecc {
       print "Low Eccentricity " + circ_node:orbit:eccentricity at (0,10).
       set circ_node:prograde to circ_node:prograde * 1.5.
     }.
-    wait 0.
-}
+  }
   print "Node Apoapsis: " + circ_node:orbit:apoapsis.
   print "Node Periapsis: " + circ_node:orbit:periapsis.
   print "Node DeltaV: " + circ_node:deltav:mag.
