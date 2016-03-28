@@ -32,12 +32,13 @@ function plot_circularization_node {
   until round(circ_node:orbit:eccentricity, 2) = target_ecc {
     print  round(circ_node:orbit:periapsis) + "   " +  round(ship:apoapsis) + " " + circ_node:orbit:eccentricity at(0,1).
     if round(circ_node:orbit:eccentricity,2) > target_ecc {
-      print "High Eccentricity " + circ_node:orbit:eccentricity at(0,10).
+      print "High Eccentricity " + circ_node:orbit:eccentricity.
       set circ_node:prograde to circ_node:prograde * 0.5.
     }else if round(circ_node:orbit:eccentricity,2) < target_ecc {
-      print "Low Eccentricity " + circ_node:orbit:eccentricity at (0,10).
+      print "Low Eccentricity " + circ_node:orbit:eccentricity.
       set circ_node:prograde to circ_node:prograde * 1.5.
     }.
+    wait 0.
   }
   print "Node Apoapsis: " + circ_node:orbit:apoapsis.
   print "Node Periapsis: " + circ_node:orbit:periapsis.
