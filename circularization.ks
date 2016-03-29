@@ -3,8 +3,10 @@
 
 function circularize {
   parameter burn_cb.
+  parameter target_ecc.
   set circ_node to plot_circularization_node().
   set burn_duration to calculate_burn_duration(circ_node).
+  wait 1.0.
   timewarp(circ_node, burn_duration).
   print "Point".
   point_to_node(circ_node).
