@@ -27,21 +27,32 @@ function plot_circularization_node {
   parameter target_ecc.
   parameter target_apo.
   set apo_time to time:seconds + eta:apoapsis.
+  set pred_apo_vel to velocityat(ship, apo_time).
+  set gm to constant:g * Kerbin:mass.
+  set orb_rad to Kerbin:radius + ship:apoapsis.
+  set circ_orb_vel to sqrt(gm/orb_rad).
+  print circ_orb_vel.
+  print pred_apo_vel:orbit:mag.
+  set initial_burn_velocity to circ_orb_vel - pred_apo_vel:orbit:mag.
   //TODO detect body and calculate escape velocity.
-  set initial_burn_velocity to 3431 - velocity:orbit:mag.
+  //set initial_burn_velocity to 3431 - velocity:orbit:mag.
   set circ_node to node(apo_time, 0, 0, initial_burn_velocity).
   add circ_node.
-  until round(circ_node:orbit:eccentricity, 2) = target_ecc {
-    print  round(circularizerc_node:orbit:periapsis) + "   " +  round(ship:apoapsis) + " " + circ_node:orbit:eccentricity at(0,1).
-    if circ_node:orbit:apoapsis > ship:apoapsis {
-      print "High Eccentricity " + circ_node:orbit:eccentricity.
-      set circ_node:prograde to circ_node:prograde * 0.5.
-    }else if circ_node:orbit:periapsis < target_apo {
-      print "Low Eccentricity " + circ_node:orbit:eccentricity.
-      set circ_node:prograde to circ_node:prograde * 1.5.
-    }.
-    wait 0.
-  }
+  clearscreen.
+  print initial_burn_velocity.
+  //wait 5.0.
+  //until round(circ_node:orbit:eccentricity, 2) = target_ecc {
+  //  print  round(circ_node:orbit:periapsis) + "   " +  round(circ_node:orbit:apoapsis) + " " + circ_node:orbit:eccentricity at(0,1).
+  //  if circ_node:orbit:apoapsis > ship:apoapsis {
+  //    print "High Eccentricity " + circ_node:orbit:eccentricity.
+  //    set circ_node:prograde to circ_node:prograde * 0.5.
+  //  }.
+  //  if circ_node:orbit:periapsis < target_apo {
+  //    print "Low Eccentricity " + circ_node:orbit:eccentricity.
+  //    set circ_node:prograde to circ_node:prograde * 1.5.
+  //  }.
+  //  wait 0.01.
+  //}
   print "Node Apoapsis: " + circ_node:orbit:apoapsis.
   print "Node Periapsis: " + circ_node:orbit:periapsis.
   print "Node DeltaV: " + circ_node:deltav:mag.
