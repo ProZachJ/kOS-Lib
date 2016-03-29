@@ -22,7 +22,7 @@ function doBurn {
 	set engine to probe[0].
 	clearscreen.
 	print "circ burn".
-	rcs on
+	rcs on.
 	wait 1.0.
 	lock throttle to 1.
 	engine:activate().
