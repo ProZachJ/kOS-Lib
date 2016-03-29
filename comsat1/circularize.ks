@@ -1,13 +1,19 @@
+//should drop to 4 hour orbit and recircularize after 1 orbit
+
+//lib
 run circularization.ks.
 
 circularize(doBurn@, 0.01).
-wait 1.
+wait 1.0.
 
 function doBurn {
-  clearscreen.
-  print "circ burn" at(0,1).
-  rcs on.
-  wait 1.
-  lock throttle to 1.
-  rcs off.
+	list engines in probe.
+	set engine to probe[0].
+	clearscreen.
+	print "circ burn".
+	rcs on.
+	wait 1.0.
+	lock throttle to 1.
+	engine:activate().
+	rcs off.
 }.
