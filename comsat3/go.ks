@@ -15,4 +15,3 @@ run drop_orbit.ks.
 wait 1.
 copy activate.ks from 0.
 run activate.ks.
-delete activate.ks.
