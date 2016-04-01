@@ -8,22 +8,23 @@ rcs on.
 print facing:pitch.
 print ship:retrograde:pitch.
 wait until abs(ship:retrograde:pitch - facing:pitch) < 0.15 and abs(ship:retrograde:yaw - facing:yaw) < 0.15.
-list engines in probe.
-set engine to probe[0].
-engine:activate().
 lock throttle to 1.
 rcs off.
 wait until ship:orbit:period <= 14400.
 lock throttle to 0.
 wait 1.0.
-circularize(doBurn@, 0.01).
+circularize(circ_burn@, 0.01).
 wait 1.0.
 
-function doBurn {
+function circ_burn {
 	clearscreen.
+	list engines in probe.
 	print "circ burn".
 	rcs on.
-	wait 1.0.
+	set ship:control:fore to 1.
+	wait 2.0.
+	probe[0]:activate().
 	lock throttle to 1.
 	rcs off.
+	set ship:control:neutralize to true.
 }.
