@@ -17,9 +17,13 @@ function launch {
   //launch
   run countdown.ks.
 
-  when maxthrust <= 0 then { stage. }.
+  //when maxthrust <= 0 then { stage. }.
   ascend_to_velocity(ascent_velocity).
   turn_to_heading(heading, pitch).
+  wait until ship:altitude >= gravity_alt * 0.95.
+  lock throttle to 0.
+  stage.
+  lock throttle to 1.
   gravity_turn(gravity_alt).
   seperate_fairings(fairing_alt).
   burn_to_target_apoapsis(target_apo).
