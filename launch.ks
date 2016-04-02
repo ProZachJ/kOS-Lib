@@ -13,6 +13,7 @@ function launch {
   parameter pitch.
   parameter gravity_alt.
   parameter fairing_alt.
+  parameter orbit_burn.
   //launch
   run countdown.ks.
 
@@ -26,17 +27,6 @@ function launch {
   //eject spent stage
   stage.
 
-  //pass burn routine and target eccentricity to circularizer
-  circularize(doBurn@, 0.01).
+  circularize(orbit_burn, 0.01).
   wait 1.
 }
-
-function doBurn {
-  clearscreen.
-  print "BURN" AT(0,1).
-  rcs on.
-  wait 1.
-  lock throttle to 1.
-  stage.
-  rcs off.
-}.
