@@ -6,21 +6,26 @@ copy launch.ks to 1.
 switch to 1.
 
 run launch.ks.
+//target_alt, asc_vel, heading, pitch, gravity_alt, fairing_alt
+launch(286300, 100, 90, 80, 12000, 65000).
+
 delete ascent.ks.
 delete countdown.ks.
 delete launch.ks.
 
 copy drop_orbit.ks from 0.
 run drop_orbit.ks.
+
 dropOrbit(14400, retro_burn@, circ_burn@).
 wait 1.
+
 copy activate.ks from 0.
 run activate.ks.
 
 function retro_burn {
 	lock steering to ship:retrograde.
-	rcs on
-	wait until abs(ship:retrograde:pitch - facing:pitch) < 0.15 and abs(ship:retrograde:yaw - facing) < 0.15.
+	rcs on.
+	wait until abs(ship:retrograde:pitch - facing:pitch) < 0.15 and abs(ship:retrograde:yaw - facing:yaw) < 0.15.
 	set ship:control:fore to 1.
 	wait 2.0.
 	lock throttle to 1.
