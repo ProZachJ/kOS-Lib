@@ -6,22 +6,30 @@ clearscreen.
 run ascent.ks.
 run circularization.ks.
 
-//launch
-run countdown.ks.
-when maxthrust <= 0 then { stage. }.
-set target_apo to 2863000.
-ascend_to_velocity(100).
-turn_to_heading(90,80).
-gravity_turn(15000).
-seperate_fairings(65000).
-burn_to_target_apoapsis(target_apo).
+function launch {
+  parameter target_apo.
+  parameter ascent_velocity.
+  parameter heading.
+  parameter pitch.
+  parameter gravity_alt.
+  parameter fairing_alt.
+  //launch
+  run countdown.ks.
 
-//eject spent stage
-stage.
+  when maxthrust <= 0 then { stage. }.
+  ascend_to_velocity(ascent_velocity).
+  turn_to_heading(heading, pitch).
+  gravity_turn(gravity_alt).
+  seperate_fairings(fairing_alt).
+  burn_to_target_apoapsis(target_apo).
 
-//pass burn routine and target eccentricity to circularizer
-circularize(doBurn@, 0.01).
-wait 1.
+  //eject spent stage
+  stage.
+
+  //pass burn routine and target eccentricity to circularizer
+  circularize(doBurn@, 0.01).
+  wait 1.
+}
 
 function doBurn {
   clearscreen.

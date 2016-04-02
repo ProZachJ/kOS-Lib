@@ -6,6 +6,9 @@ copy launch.ks to 1.
 switch to 1.
 
 run launch.ks.
+//target_alt, asc_vel, heading, pitch, gravity_alt, fairing_alt
+launch(286300, 100, 90, 80, 12000, 65000).
+
 delete ascent.ks.
 delete countdown.ks.
 delete launch.ks.
@@ -13,7 +16,9 @@ delete launch.ks.
 copy drop_orbit.ks from 0.
 run drop_orbit.ks.
 dropOrbit(14400, retro_burn_cb@, circ_burn_cb@).
+
 wait 1.
+
 copy activate.ks from 0.
 run activate.ks.
 
