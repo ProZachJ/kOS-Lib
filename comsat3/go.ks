@@ -12,22 +12,22 @@ delete launch.ks.
 
 copy drop_orbit.ks from 0.
 run drop_orbit.ks.
-dropOrbit(14400, retro_burn@, circ_burn@).
+dropOrbit(14400, retro_burn_cb@, circ_burn_cb@).
 wait 1.
 copy activate.ks from 0.
 run activate.ks.
 
-function retro_burn {
+function retro_burn_cb {
 	lock steering to ship:retrograde.
-	rcs on
-	wait until abs(ship:retrograde:pitch - facing:pitch) < 0.15 and abs(ship:retrograde:yaw - facing) < 0.15.
+	rcs on.
+	wait until abs(ship:retrograde:pitch - facing:pitch) < 0.15 and abs(ship:retrograde:yaw - facing:yaw) < 0.15.
 	set ship:control:fore to 1.
 	wait 2.0.
 	lock throttle to 1.
 	rcs off.
 }
 
-function circ_burn {
+function circ_burn_cb {
 	clearscreen.
 	list engines in probe.
 	print "circ burn".
