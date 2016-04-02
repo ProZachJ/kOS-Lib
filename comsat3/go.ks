@@ -7,7 +7,7 @@ switch to 1.
 
 run launch.ks.
 //target_alt, asc_vel, heading, pitch, gravity_alt, fairing_alt
-launch(286300, 100, 90, 80, 12000, 65000).
+launch(2863000, 100, 90, 80, 12000, 65000).
 
 delete ascent.ks.
 delete countdown.ks.
